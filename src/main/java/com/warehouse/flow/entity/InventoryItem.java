@@ -1,6 +1,7 @@
 package com.warehouse.flow.entity;
 
 import com.warehouse.flow.model.enums.ItemCategory;
+import com.warehouse.flow.model.enums.ItemSubcategory;
 import com.warehouse.flow.model.enums.StockStatus;
 import com.warehouse.flow.model.enums.UnitOfMeasure;
 import jakarta.persistence.*;
@@ -26,7 +27,7 @@ public class InventoryItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "El código SKU es obligatorio")
+    @NotBlank(message = "El código SKU o referencia es obligatorio")
     @Column(nullable = false, unique = true, length = 50)
     private String sku;
 
@@ -34,10 +35,15 @@ public class InventoryItem {
     @Column(nullable = false, length = 150)
     private String name;
 
-    @NotNull(message = "La categoría es obligatoria")
+    @NotNull(message = "La categoría principal es obligatoria")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
     private ItemCategory category;
+
+    @NotNull(message = "La subcategoría o familia es obligatoria")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    private ItemSubcategory subcategory;
 
     @NotNull(message = "La cantidad es obligatoria")
     @DecimalMin(value = "0.0", inclusive = true, message = "El stock no puede ser negativo")
