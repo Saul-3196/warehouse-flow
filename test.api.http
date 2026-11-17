@@ -1,0 +1,78 @@
+### 1. Alta de Producto Terminado: Mix Cherry
+POST http://localhost:8081/api/v1/inventory
+Content-Type: application/json
+
+{
+  "sku": "PT-MIX-CHERRY",
+  "name": "Mix Cherry Sobres 9g (Caja 24 uds)",
+  "category": "FINISHED_GOOD",
+  "subcategory": "MIX",
+  "quantity": 45,
+  "unitOfMeasure": "BOX",
+  "batchNumber": "L26-1102",
+  "expirationDate": "2028-05-30",
+  "location": "P01-M02-N1"
+}
+
+### 2. Alta de Producto Terminado: Mix Cola
+POST http://localhost:8081/api/v1/inventory
+Content-Type: application/json
+
+{
+  "sku": "PT-MIX-COLA",
+  "name": "Mix Cola Sobres 9g (Caja 24 uds)",
+  "category": "FINISHED_GOOD",
+  "subcategory": "MIX",
+  "quantity": 120,
+  "unitOfMeasure": "BOX",
+  "batchNumber": "L26-1105",
+  "expirationDate": "2028-06-15",
+  "location": "P01-M02-N2"
+}
+
+### 3. Alta de Embalaje: Cajas de cartón
+POST http://localhost:8081/api/v1/inventory
+Content-Type: application/json
+
+{
+  "sku": "EMB-CAJA-MIX24",
+  "name": "Caja Cartón Expositora Mix 24 uds",
+  "category": "PACKAGING",
+  "subcategory": "BOXES",
+  "quantity": 6,
+  "unitOfMeasure": "PALLET",
+  "batchNumber": "PRV-8841",
+  "location": "P04-M01-N1"
+}
+
+### 4. Alta de Materia Prima: Aroma Cherry en polvo
+POST http://localhost:8081/api/v1/inventory
+Content-Type: application/json
+
+{
+  "sku": "MP-ARO-CHERRY",
+  "name": "Aroma Cherry Concentrado Polvo",
+  "category": "RAW_MATERIAL",
+  "subcategory": "FLAVORS",
+  "quantity": 10,
+  "unitOfMeasure": "KG",
+  "batchNumber": "MP-9920",
+  "expirationDate": "2027-11-20",
+  "location": "CAMARA-AROMAS-02"
+}
+
+### ---------------------------------------------------------
+### CONSULTAS VISUALES DEL OPERARIO
+### ---------------------------------------------------------
+
+### 5. Búsqueda libre por texto ("cherry") -> Debe devolver el Mix y el Aroma
+GET http://localhost:8081/api/v1/inventory/search?query=cherry
+
+### 6. Navegación por Familia: Pulsando el botón "MIX"
+GET http://localhost:8081/api/v1/inventory/family/MIX
+
+### 7. Ajuste de stock: Salida de 5 cajas de Mix Cherry (quedan 40)
+PATCH http://localhost:8081/api/v1/inventory/PT-MIX-CHERRY/stock?quantity=40
+
+### 8. Listar todo el inventario actual
+GET http://localhost:8081/api/v1/inventory
